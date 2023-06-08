@@ -11,8 +11,7 @@ public:
                 l = mid+1;
             }
         }
-        r = h;
-        l = 0, h = m;
+        r = h, l = 0, h = m;
         while(l<h) {
             int mid = l+(h-l)/2;
             if(v[r][mid]>=target) {
