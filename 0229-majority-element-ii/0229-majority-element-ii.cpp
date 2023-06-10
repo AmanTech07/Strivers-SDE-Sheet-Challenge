@@ -1,46 +1,32 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& v) {
-        // int cnt = 1, ele = v[0], ign, n = v.size();
-        // for(int i=1; i<n; i++) {
-        //     if(v[i]==ele) cnt++;
-        //     else cnt--;
-        //     if(cnt<=0) {
-        //         cnt = 1;
-        //         ele = v[i];
-        //     }
-        // }
-        // ign = ele, cnt = 0;
-        // int flg = 0, frst=0, scnd = 0;
-        // for(int i=0; i<n; i++) {
-        //     if(v[i]==ign) continue;
-        //     if(!flg) {
-        //         ele = v[i], cnt = 1, flg = 1;
-        //     }
-        //     else {
-        //         if(v[i]==ele) cnt++;
-        //         else cnt--;
-        //     }
-        //     if(cnt<=0) {
-        //         cnt = 1, ele = v[i];
-        //     }
-        // }
-        // for(int i=0; i<n; i++) {
-        //     if(v[i]==ign) frst++;
-        //     else if(v[i]==ele) scnd++;
-        // }
-        vector<int> ans;
-        // if(frst>n/3) ans.push_back(ign);
-        // if(scnd>n/3) ans.push_back(ele);
-        // return ans;
-        map<int, int> m;
-        set<int> s;
-        int n = v.size();
+        int cnt1 = 0, cnt2 = 0, ele1 = INT_MIN, ele2 = INT_MIN, n = v.size();
         for(int i=0; i<n; i++) {
-            m[v[i]]++;
-            if(m[v[i]]>n/3) s.insert(v[i]);
+            if(ele1==v[i]) cnt1++;
+            else if(ele2==v[i]) cnt2++;
+            else if(cnt1==0) {
+                ele1 = v[i];
+                cnt1 = 1;
+            }
+            else if(cnt2==0) {
+                ele2 = v[i];
+                cnt2 = 1;
+            }
+            else {
+                cnt1--;
+                cnt2--;
+            }
         }
-        for(auto &x: s) ans.push_back(x);
+        cnt1 = 0, cnt2 = 0;
+        for(int i=0; i<n; i++) {
+            if(v[i]==ele1) cnt1++;
+            else if(v[i]==ele2) cnt2++;
+        }
+        vector<int> ans;
+        if(cnt1>n/3) ans.push_back(ele1);
+        if(cnt2>n/3) ans.push_back(ele2);
         return ans;
+        
     }
 };
