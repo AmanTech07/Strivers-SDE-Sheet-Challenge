@@ -16,13 +16,15 @@ public:
             ptr->next = prev;
             return head;
         }
-        ListNode* hd = reverse(head, ptr->next, ptr);
+        head = reverse(head, ptr->next, ptr);
         ptr->next = prev;
-        return hd;
+        return head;
     }
 
     ListNode* reverseList(ListNode* head) {
-        ListNode* ptr = head, *prev = NULL, *tmp;
+        // -------------------Iterative-----------------------
+
+        // ListNode* ptr = head, *prev = NULL, *tmp;
         // while(ptr) {
         //     tmp = ptr->next;
         //     ptr->next = prev;
@@ -30,8 +32,11 @@ public:
         //     ptr = tmp;
         // }
         // return prev;
-        if(!head) return head;
-        head = reverse(head, ptr, prev);
+
+        // ----------------------Recursive-----------------------
+
+        ListNode* ptr = head, *prev = NULL;
+        if(head) head = reverse(head, ptr, prev);
         return head;
     }
 };
