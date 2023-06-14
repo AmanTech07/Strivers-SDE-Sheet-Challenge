@@ -11,20 +11,26 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, vector<int>& v) {
-        if(!root) return;
-        dfs(root->left, v);
-        v.push_back(root->val);
-        dfs(root->right, v);
-    }
+    // void dfs(TreeNode* root, vector<int>& v) {
+    //     if(!root) return;
+    //     dfs(root->left, v);
+    //     v.push_back(root->val);
+    //     dfs(root->right, v);
+    // }
 
+    int ans = INT_MAX, num = -1;
     int getMinimumDifference(TreeNode* root) {
-        vector<int> v;
-        dfs(root, v);
-        int mini=INT_MAX;
-        for(int i=1; i<v.size(); i++) {
-            mini = min(mini, v[i]-v[i-1]);
-        }
-        return mini;
+        // vector<int> v;
+        // dfs(root, v);
+        // int mini=INT_MAX;
+        // for(int i=1; i<v.size(); i++) {
+        //     mini = min(mini, v[i]-v[i-1]);
+        // }
+        // return mini;
+        if(root->left) getMinimumDifference(root->left);
+        if(num>=0) ans = min(ans, root->val-num);
+        num = root->val;
+        if(root->right) getMinimumDifference(root->right);
+        return ans;
     }
 };
