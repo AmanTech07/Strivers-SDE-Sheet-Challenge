@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& v) {
         vector<vector<int>> ans;
-        set<vector<int>> s;
         sort(v.begin(), v.end());
         for(int i=0; i<v.size()-2; i++) {
             int find = -v[i], l = i+1, r = v.size()-1;
@@ -11,13 +10,17 @@ public:
                     r--;
                 }
                 else if(v[l]+v[r]==find) {
-                    s.insert({v[i], v[l], v[r]});
-                    l++, r--;
+                    ans.push_back({v[i], v[l], v[r]});
+                    int k = l, p = r;
+                    while(l<r && v[k]==v[l]) l++;
+                    while(l<r && v[p]==v[r]) r--;
                 }
                 else l++;
             }
+            int flg = v[i];
+            while(i<v.size() && v[i]==flg) i++;
+            i--;
         }
-        for(auto &x: s) ans.push_back(x);
         return ans;
     }
 };
