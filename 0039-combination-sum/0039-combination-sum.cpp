@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void func(int i, int target, vector<int> & v, vector<int> tmp, vector<vector<int>>& ans) {
+    void func(int i, int target, vector<int> & v, vector<int>& tmp, vector<vector<int>>& ans) {
         if(i>=v.size()) {
             if(target==0) ans.push_back(tmp);
             return;
@@ -9,6 +9,7 @@ public:
         if(v[i]<=target) {
             tmp.push_back(v[i]);
             func(i, target-v[i], v, tmp, ans);
+            tmp.pop_back();
         }
     }
 
