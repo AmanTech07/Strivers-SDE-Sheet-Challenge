@@ -1,7 +1,7 @@
 class Solution {
 public:
     void func(int i, int target, vector<int> & v, vector<int>& tmp, vector<vector<int>>& ans) {
-        if(i>=v.size()) {
+        if(i>=v.size() || target==0) {
             if(target==0) ans.push_back(tmp);
             return;
         }
@@ -20,4 +20,7 @@ public:
         func(0, target, v, tmp, ans);
         return ans;
     }
+
+    // --------------------------TC: O(2^n)-------------------------
+    // --------------------------SC: O(n*n)-----------------------------
 };
