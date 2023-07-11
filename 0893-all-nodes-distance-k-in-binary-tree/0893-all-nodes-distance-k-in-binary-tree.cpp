@@ -9,18 +9,18 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, TreeNode* target, unordered_map<TreeNode*, TreeNode*>& m, TreeNode* parent) {
+    unordered_map<TreeNode*, TreeNode*> m;
+    void dfs(TreeNode* root, TreeNode* target, TreeNode* parent) {
         if(!root) return;
         m[root] = parent;
         if(root==target) return;
-        dfs(root->left, target, m, root);
-        dfs(root->right, target, m, root);
+        dfs(root->left, target, root);
+        dfs(root->right, target, root);
     }
 
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        unordered_map<TreeNode*, TreeNode*> m;
         TreeNode* parent = NULL;
-        dfs(root, target, m, parent);
+        dfs(root, target, parent);
         queue<TreeNode*> q;
         q.push(target);
         vector<int> vis(501, 0), ans;
