@@ -36,11 +36,11 @@ public:
         sw_sz = sw.size();
         while(!q.empty()) {
             int sz = q.size();
+            vector<string> to_erase;
             level++;
             while(sz--) {
                 string s = q.front();
                 q.pop();
-                vector<string> to_erase;
                 for(auto &x: st) {
                     int cnt = 0;
                     for(int i=0; i<sw_sz; i++) {
@@ -56,6 +56,7 @@ public:
                     }
                 }
                 for(auto &x: to_erase) st.erase(x);
+                // to_erase.clear();
             }
             if(flg) break;
         }
