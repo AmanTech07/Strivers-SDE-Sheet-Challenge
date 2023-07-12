@@ -11,31 +11,19 @@ private:
             reverse(v.begin(), v.end());
             return;
         }
-        for(auto &x: m) {
-            string str = x.first;
-            int cnt = 0;
-            for(int i=0; i<sw_sz; i++) {
-                if(s[i]!=str[i]) cnt++;
-            }
-            if(cnt==1 && m[s]>x.second) {
-                v.push_back(str);
-                dfs(str, v);
-                v.pop_back();
+        int step = m[s];
+        for(int i=0; i<sw_sz; i++) {
+            for(char ch = 'a'; ch <= 'z'; ch++) {
+                char org = s[i];
+                s[i] = ch;
+                if(m.count(s) && m[s]<step) {
+                    v.push_back(s);
+                    dfs(s, v);
+                    v.pop_back();
+                }
+                s[i] = org;
             }
         }
-        // int step = m[s];
-        // for(int i=0; i<sw_sz; i++) {
-        //     for(char ch = 'a'; ch <= 'z'; ch++) {
-        //         char org = s[i];
-        //         s[i] = ch;
-        //         if(m.count(s) && m[s]<step) {
-        //             v.push_back(s);
-        //             dfs(s, v);
-        //             v.pop_back();
-        //         }
-        //         s[i] = org;
-        //     }
-        // }
     }
 public:
     vector<vector<string>> findLadders(string sw, string ew, vector<string>& wl) {
@@ -49,39 +37,23 @@ public:
         sw_sz = sw.size();
         while(!q.empty()) {
             int sz = q.size();
-            vector<string> to_erase;
             level++;
             while(sz--) {
                 string s = q.front();
                 q.pop();
-                for(auto &x: st) {
-                    int cnt = 0;
-                    for(int i=0; i<sw_sz; i++) {
-                        if(s[i]!=x[i]) cnt++;
-                    }
-                    if(cnt==1) {
-                        m[x] = level;
-                        q.push(x);
-                        to_erase.push_back(x);
-                        if(x==ew) {
-                            flg = 1;
+                for(int i=0; i<sw_sz; i++) {
+                    for(char ch = 'a'; ch <= 'z'; ch++) {
+                        char org = s[i];
+                        s[i] = ch;
+                        if(st.count(s)) {
+                            q.push(s);
+                            m[s] = level;
+                            st.erase(s); 
+                            if(s==ew) flg = 1;
                         }
+                        s[i] = org;
                     }
                 }
-                for(auto &x: to_erase) st.erase(x);
-                // for(int i=0; i<sw_sz; i++) {
-                //     for(char ch = 'a'; ch <= 'z'; ch++) {
-                //         char org = s[i];
-                //         s[i] = ch;
-                //         if(st.count(s)) {
-                //             q.push(s);
-                //             m[s] = level;
-                //             st.erase(s); 
-                //             if(s==ew) flg = 1;
-                //         }
-                //         s[i] = org;
-                //     }
-                // }
             }
             if(flg) break;
         }
