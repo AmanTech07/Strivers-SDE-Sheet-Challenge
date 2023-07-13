@@ -1,42 +1,25 @@
-
 class Solution {
 public:
-    int shortestPathBinaryMatrix(std::vector<std::vector<int>>& grid) {
-        if (grid[0][0] == 1 || grid[grid.size() - 1][grid[0].size() - 1] == 1) {
-            return -1;
-        }
-        
-        int n = grid.size();
-        std::vector<int> dx = {-1, 0, 1};
-        std::vector<int> dy = {-1, 0, 1};
-        
-        std::queue<std::vector<int>> queue;
-        queue.push({0, 0, 1});
-        grid[0][0] = 1;
-        
-        while (!queue.empty()) {
-            std::vector<int> curr = queue.front();
-            queue.pop();
-            int x = curr[0];
-            int y = curr[1];
-            int steps = curr[2];
-            
-            if (x == n - 1 && y == n - 1) {
-                return steps;
-            }
-            
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    int nx = x + dx[i];
-                    int ny = y + dy[j];
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && grid[nx][ny] == 0) {
-                        queue.push({nx, ny, steps + 1});
-                        grid[nx][ny] = 1;
-                    }
-                }
+    int shortestPathBinaryMatrix(vector<vector<int>>& g) {
+        int n = g.size();
+        if(g[0][0]==1 || g[n-1][n-1]==1) return -1;
+        vector<vector<int>> dis(n, vector<int>(n, 1e9));
+        dis[0][0] = 1;
+        set<pair<int, pair<int, int>>> st;
+        st.insert({1, {0,0}});
+        vector<int> x = {-1, -1, -1, 0, 0, 1, 1, 1}, y = {-1, 0, 1, -1, 1, -1, 0, 1};
+        while(!st.empty()) {
+            auto ele = *st.begin();
+            st.erase(ele);
+            int d = ele.first, x_pt = ele.second.first, y_pt = ele.second.second;
+            for(int k=0; k<8; k++) {
+                int i = x[k] + x_pt, j = y[k] + y_pt;
+                if(i<0 || i==n || j<0 || j==n || g[i][j]==1 || (dis[i][j]<=d+1)) continue; 
+                dis[i][j] = d+1;
+                st.insert({dis[i][j], {i, j}});
+                if(i==n-1 && j==n-1) return dis[i][j];
             }
         }
-        
-        return -1;
+        return dis[n-1][n-1]==1e9?-1:dis[n-1][n-1];
     }
 };
