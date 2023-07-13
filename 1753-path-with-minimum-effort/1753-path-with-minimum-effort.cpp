@@ -17,6 +17,7 @@ public:
                 if(i<0 || i==n || j<0 || j==m) continue;
                 int d = max(prev, abs(g[i][j]-g[x_cur][y_cur]));
                 if(dif[i][j]<=d) continue;
+                if(dif[i][j]!=1e9) st.erase({dif[i][j], {i, j}});
                 dif[i][j] = d;
                 st.insert({dif[i][j], {i, j}});
             }
