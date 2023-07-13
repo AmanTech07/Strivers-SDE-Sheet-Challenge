@@ -11,7 +11,6 @@ public:
             auto ele = *st.begin();
             st.erase(ele);
             int prev = ele.first, x_cur = ele.second.first, y_cur = ele.second.second;
-            if(x_cur==n-1 && y_cur==m-1) return dif[n-1][m-1];
             for(int k=0; k<4; k++) {
                 int i = x[k] + x_cur, j = y[k] + y_cur;
                 if(i<0 || i==n || j<0 || j==m) continue;
