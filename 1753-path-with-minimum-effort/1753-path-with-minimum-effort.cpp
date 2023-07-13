@@ -6,7 +6,7 @@ public:
         dif[0][0] = 0;
         set<pair<int, pair<int, int>>> st;
         st.insert({0, {0, 0}});
-        vector<int> x = {1, -1, 0, 0}, y = {0, 0, 1, -1};
+        int x[] = {1, -1, 0, 0}, y[] = {0, 0, 1, -1};
         while(!st.empty()) {
             auto ele = *st.begin();
             st.erase(ele);
