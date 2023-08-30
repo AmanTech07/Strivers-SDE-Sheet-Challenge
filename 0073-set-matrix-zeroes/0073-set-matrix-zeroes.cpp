@@ -1,27 +1,28 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& v) {
-        set<int> r, c;
-        int m = v.size(), n = v[0].size();
-        for(int i=0; i<m; i++) {
-            for(int j=0; j<n; j++) {
+        bool row = false, col = false;
+        int n = v.size(), m = v[0].size();
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
+                if(i==0 && v[i][j]==0) row = true;
+                if(j==0 && v[i][j]==0) col = true;
                 if(v[i][j]==0) {
-                    r.insert(i);
-                    c.insert(j);
+                    v[i][0] = 0;
+                    v[0][j] = 0;
                 }
             }
         }
-        for(auto &x: r) {
-            for(int j=0; j<n; j++) {
-                v[x][j] = 0;
+        for(int i=1; i<n; i++) {
+            for(int j=1; j<m; j++) {
+                if(v[0][j]==0 || v[i][0]==0) v[i][j] = 0;
             }
         }
-        for(auto &y: c) {
-            for(int i=0; i<m; i++) {
-                v[i][y] = 0;
-            }
+        if(col==1) {
+            for(int i=0; i<n; i++) v[i][0] = 0;
+        } 
+        if(row==1) {
+            for(int j=0; j<m; j++) v[0][j] = 0; 
         }
     }
-    // -------------TC: O(n^2 log (n))------------
-    // -------------SC: O(2n) {this is extra time complexity}-----------
 };
