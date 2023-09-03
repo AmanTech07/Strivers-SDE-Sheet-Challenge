@@ -13,4 +13,7 @@ public:
         vector<vector<int>> dp(m+1, vector<int> (n, -1));
         return path(0, 0, m, n, dp);
     }
+
+    // -------------------TC: O(m*n)------------------
+    // -------------------SC: O(m*n)------------------
 };
