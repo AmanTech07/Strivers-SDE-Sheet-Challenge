@@ -17,8 +17,7 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        Node* ptr = head;
-        Node *head1 = NULL, *cur = NULL;
+        Node* ptr = head, *head1 = NULL, *cur = NULL;
         int x = 0;
         while(ptr) {
             Node *tmp = new Node(ptr->val);
