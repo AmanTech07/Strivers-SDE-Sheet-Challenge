@@ -6,11 +6,13 @@ public:
         vector<vector<int>> vis(n, vector<int>(m, 1e9));
         st.insert({0, {0, 0}});
         vis[0][0] = 0;
-        int x[4] = {0, 0, -1, 1}, y[4] = {-1, 1, 0, 0};
+        int x[] = {0, 0, -1, 1}, y[] = {-1, 1, 0, 0};
         while(!st.empty()) {
             auto it = *st.begin();
             st.erase(it);
             int effort = it.first, u = it.second.first, v = it.second.second;
+            if(u==n-1 && v==m-1) return effort;
+            if(effort>vis[u][v]) continue;
             for(int i=0; i<4; i++) {
                 int xx = u+x[i], yy = v+y[i];
                 if(xx>=0 && xx<n && yy>=0 && yy<m) {
