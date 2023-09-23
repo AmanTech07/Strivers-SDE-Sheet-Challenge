@@ -27,5 +27,8 @@ public:
         if(prev) prev->next = prev->next->next;
         if(n==cnt) head = head->next;
         return head;
+
+        // ------------------------TC: O(m)-----------------------
+        // ------------------------SC: O(1)-----------------------
     }
 };
