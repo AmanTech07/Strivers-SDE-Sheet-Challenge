@@ -12,13 +12,13 @@ public:
             pos1 = pos;
             int mini = v[pos];
             for(int i=pos; i<n; i++) {
-                if(v[i]>v[pos-1] && v[i]<mini) {
+                if(v[i]>v[pos-1] && v[i]<=mini) {
                     mini = v[i];
                     pos1 = i;
                 } 
             }
             swap(v[pos-1], v[pos1]);
         }
-        sort(v.begin()+pos, v.end());
+        reverse(v.begin()+pos, v.end());
     }
 };
