@@ -3,10 +3,10 @@ public:
     double findMedianSortedArrays(vector<int>& v1, vector<int>& v2) {
         if(v1.size()>v2.size()) return findMedianSortedArrays(v2, v1);
         int n = v1.size(), m = v2.size();
-        int low = 0, high = n, l1, l2, h1, h2, total = (n+m+1)/2;
+        int low = 0, high = n, l1, l2, h1, h2, half = (n+m+1)/2;
         while(low<=high) {
             int cut1 = low+(high-low)/2;
-            int cut2 = total - cut1;
+            int cut2 = half - cut1;
             if(cut1==0) l1 = INT_MIN;
             else l1 = v1[cut1-1];
             if(cut1==n) h1 = INT_MAX;
