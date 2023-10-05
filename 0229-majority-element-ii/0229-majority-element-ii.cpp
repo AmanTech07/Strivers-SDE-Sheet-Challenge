@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // ---------------------TC: O(n)----------------------
+    // ---------------------SC: O(1)----------------------
     vector<int> majorityElement(vector<int>& v) {
         int cnt1 = 0, cnt2 = 0, ele1 = INT_MIN, ele2 = INT_MIN, n = v.size();
         for(int i=0; i<n; i++) {
@@ -27,6 +29,5 @@ public:
         if(cnt1>n/3) ans.push_back(ele1);
         if(cnt2>n/3) ans.push_back(ele2);
         return ans;
-        
     }
 };
