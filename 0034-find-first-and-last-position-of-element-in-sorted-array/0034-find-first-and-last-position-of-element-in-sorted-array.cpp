@@ -15,11 +15,11 @@ public:
             }
         }
 
-        int l2=0, r2= nums.size();
-        while(l2<r2){
+        int l2=0, r2= nums.size()-1;
+        while(l2<=r2){
             int m2= l2+ (r2-l2)/2;
             if(nums[m2]>target){
-                r2=m2;
+                r2=m2-1;
             }
             else{
                 l2=m2+1;
@@ -29,9 +29,9 @@ public:
         if(nums[l1]!=target){
             return {-1,-1};
         }
-        if(l1==l2){
-            return{l1,l2};
-        }
-        return {l1, l2-1};
+        // if(l1==l2){
+        //     return{l1,l2};
+        // }
+        return {l1, r2};
     }
 };
